@@ -1,0 +1,10 @@
+---
+/* La raíz del subdominio.
+
+   No muestra nada ni lista nada: el que entra a video.emilianosalasporta.cloud
+   sin un link concreto no tiene por qué enterarse de qué hay adentro.
+   Va derecho al panel, que le va a pedir la contraseña. */
+export const prerender = false;
+
+return Astro.redirect('/admin', 302);
+---

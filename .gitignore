@@ -1,0 +1,18 @@
+# Dependencias y compilados
+node_modules/
+dist/
+.astro/
+
+# Los videos de prueba y la base local. NUNCA subir esto a GitHub.
+datos-local/
+
+# Variables de entorno (ahí va la contraseña)
+.env
+.env.*
+!.env.example
+
+# Sistema
+.DS_Store
+Thumbs.db
+*.log
+npm-debug.log*

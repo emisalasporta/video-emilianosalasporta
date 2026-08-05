@@ -1,0 +1,22 @@
+# Lo que NO se manda al servidor para construir la imagen.
+# Cuanto menos viaje, más rápido el deploy.
+
+node_modules
+dist
+.astro
+
+# Los datos de las pruebas locales. Esta línea importa: sin ella, los videos de
+# prueba de tu compu viajarían adentro de la imagen hasta el servidor.
+datos-local
+
+.git
+.gitignore
+.claude
+.vscode
+
+README.md
+*.log
+.DS_Store
+Thumbs.db
+.env
+.env.*

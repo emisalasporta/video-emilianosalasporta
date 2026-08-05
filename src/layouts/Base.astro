@@ -1,0 +1,43 @@
+---
+/* El molde de las dos páginas. Nada más que <head>, encabezado y pie.
+
+   Las tipografías se sirven desde el propio servidor (paquetes @fontsource),
+   igual que en la web principal: así esta plataforma tampoco le pide nada a
+   Google ni a ningún servidor ajeno. */
+import '@fontsource-variable/inter';
+import '@fontsource/chakra-petch/latin-300.css';
+import '@fontsource/chakra-petch/latin-600.css';
+import '@fontsource/chakra-petch/latin-700.css';
+import '@fontsource-variable/jetbrains-mono';
+import '../styles/global.css';
+
+interface Props {
+  titulo: string;
+  descripcion?: string;
+}
+
+const { titulo, descripcion } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0a0b10" />
+
+    <title>{titulo}</title>
+    {descripcion && <meta name="description" content={descripcion} />}
+
+    {/* Que ningún buscador indexe nada de acá. Los links son privados por ser
+        imposibles de adivinar; si Google los listara, dejarían de serlo. */}
+    <meta name="robots" content="noindex, nofollow" />
+
+    <link rel="icon" href="data:," />
+  </head>
+
+  <body>
+    <slot />
+  </body>
+</html>

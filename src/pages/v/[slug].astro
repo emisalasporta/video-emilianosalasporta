@@ -1,0 +1,50 @@
+---
+/* LA PÁGINA DEL VIDEO. Es lo único que ve la persona a la que le
+   pasás el link: el título arriba y el reproductor abajo.
+
+   El reproductor es el <video> del propio navegador, sin librerías
+   ni reproductores de terceros. Así la página no le pide nada a
+   ningún servidor ajeno, igual que la web principal. */
+import Base from '../../layouts/Base.astro';
+import { buscarVideo } from '../../lib/base';
+import { slugValido } from '../../lib/slug';
+
+export const prerender = false;
+
+const { slug } = Astro.params;
+const video = slugValido(slug) ? buscarVideo(slug) : null;
+
+/* Si no existe, o existe pero todavía no terminó de convertirse, la respuesta
+   es la misma: 404. Que un link a medio hornear diga "convirtiendo" le contaría
+   a un desconocido que ese código existe, y el link vale justamente porque
+   nadie sabe cuáles existen. */
+if (!video || video.estado !== 'listo') {
+  return new Response('No encontrado', { status: 404 });
+}
+
+const fuente = `/api/ver/${video.slug}`;
+---
+
+<Base titulo={video.titulo}>
+  <main>
+    <div class="container">
+      <h1 style="margin-bottom: 1.25rem;">{video.titulo}</h1>
+
+      <div class="reproductor">
+        {/* preload="metadata" baja solo la ficha del video (cuánto dura, qué
+            tamaño tiene) y no el contenido. Así la página abre al instante y
+            la barra de tiempo ya aparece con la duración correcta.
+            playsinline evita que en iPhone se abra a pantalla completa solo. */}
+        <video controls preload="metadata" playsinline>
+          <source src={fuente} type="video/mp4" />
+          Tu navegador no puede reproducir este video.
+          <a href={fuente}>Descargalo acá</a>.
+        </video>
+      </div>
+
+      <div class="pie-video">
+        <span class="marca"><b>emiliano</b> <span>salas porta</span></span>
+      </div>
+    </div>
+  </main>
+</Base>

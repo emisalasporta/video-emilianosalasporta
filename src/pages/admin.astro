@@ -1,0 +1,543 @@
+---
+/* EL PANEL. Es la única pantalla privada: pide contraseña, sube
+   videos y muestra el cajón.
+
+   La lista se dibuja desde JavaScript (no desde acá) a propósito: así la
+   plantilla de una fila existe en UN solo lugar y no hay dos versiones que
+   se puedan desincronizar cuando haya que tocar algo. */
+import Base from '../layouts/Base.astro';
+import { haySesion } from '../lib/clave';
+import { CONFIG } from '../lib/config';
+
+export const prerender = false;
+
+const entrado = haySesion(Astro.request);
+const faltaClave = !CONFIG.clave;
+
+/* Que el navegador no se guarde esta página. Lo que se ve acá depende de si hay
+   sesión abierta: sin esto, después de cerrar sesión el botón "atrás" puede
+   mostrar el panel entero sacado de la memoria del navegador. */
+Astro.response.headers.set('cache-control', 'no-store');
+---
+
+<Base titulo="Panel de videos">
+  <main>
+    <div class="container angosto">
+      <p class="eyebrow">Panel privado</p>
+      <h1 class="marca" style="margin-block: 0.35rem 1.5rem;">
+        <b>emiliano</b> <span>salas porta</span>
+      </h1>
+
+      {faltaClave && (
+        <div class="aviso aviso-mal">
+          <strong>Falta cargar la contraseña en el servidor.</strong>
+          <br />
+          En Dokploy, pestaña <b>Environment</b>, agregá la variable <code>CLAVE_ADMIN</code> y redeployá.
+          Hasta entonces no puede entrar nadie, ni vos.
+        </div>
+      )}
+
+      {!entrado && !faltaClave && (
+        <div class="card">
+          <h2 style="margin-bottom: 1.2rem;">Entrar</h2>
+          <form id="form-entrar">
+            <div class="aviso aviso-mal" id="error-entrar" hidden></div>
+            <div class="campo">
+              <label for="clave">Contraseña</label>
+              <input type="password" id="clave" name="clave" autocomplete="current-password" required />
+            </div>
+            <button type="submit" class="btn btn-primary" id="boton-entrar">Entrar</button>
+          </form>
+        </div>
+      )}
+
+      {entrado && (
+        <>
+          <section class="card" style="margin-bottom: 2rem;">
+            <h2 style="margin-bottom: 1.2rem;">Subir un video</h2>
+
+            <form id="form-subir">
+              <div class="aviso aviso-mal" id="error-subir" hidden></div>
+              <div class="aviso aviso-ok" id="ok-subir" hidden></div>
+
+              <div class="campo">
+                <label for="titulo">Título</label>
+                <input type="text" id="titulo" name="titulo" maxlength="200" placeholder="Cómo cargar una ficha" required />
+              </div>
+
+              <div class="campo">
+                <label for="archivo">Archivo</label>
+                <label class="suelta" id="suelta">
+                  <input type="file" id="archivo" name="archivo" accept="video/*,.wmv,.mkv,.avi,.mov,.flv" required />
+                  <span class="nombre" id="nombre-archivo">Elegí un video o arrastralo hasta acá</span>
+                  <br />
+                  <span class="ayuda">Sirve cualquier formato: .wmv, .mp4, .mov, .avi, .mkv</span>
+                </label>
+              </div>
+
+              <div id="zona-progreso" hidden>
+                <div class="barra" id="barra"><i id="barra-relleno"></i></div>
+                <div class="progreso-texto">
+                  <span id="progreso-etapa">Subiendo</span>
+                  <span id="progreso-numero">0%</span>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary" id="boton-subir" style="margin-top: 0.5rem;">
+                Subir y convertir
+              </button>
+            </form>
+          </section>
+
+          <section>
+            <div class="medidor">
+              <span id="medidor-cajon">Cargando…</span>
+              <button type="button" class="btn btn-ghost btn-chico" id="boton-salir">Cerrar sesión</button>
+            </div>
+            <ul class="lista" id="lista"></ul>
+            <div class="vacio" id="vacio" hidden>Todavía no subiste ningún video.</div>
+
+            {/* La comprobación del volumen persistente. Si esta fecha cambia
+                después de un redeploy, el volumen NO está montado y los videos
+                se van a borrar solos. Está explicado en el README. */}
+            <p class="pie-video" id="pie-volumen" style="font-family: var(--font-mono); font-size: 0.75rem;"></p>
+          </section>
+        </>
+      )}
+    </div>
+  </main>
+
+  <script define:vars={{ maxVideos: CONFIG.maxVideos, maxMB: CONFIG.maxMB }}>
+    /* ==========================================================
+       ENTRAR
+       ========================================================== */
+    const formEntrar = document.getElementById('form-entrar');
+
+    if (formEntrar) {
+      const errorEntrar = document.getElementById('error-entrar');
+      const botonEntrar = document.getElementById('boton-entrar');
+
+      formEntrar.addEventListener('submit', async (evento) => {
+        evento.preventDefault();
+        errorEntrar.hidden = true;
+        botonEntrar.disabled = true;
+
+        try {
+          const respuesta = await fetch('/api/entrar', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ clave: document.getElementById('clave').value }),
+          });
+          const datos = await respuesta.json();
+
+          if (!respuesta.ok) throw new Error(datos.error ?? 'No se pudo entrar.');
+          location.reload();
+        } catch (error) {
+          errorEntrar.textContent = error.message;
+          errorEntrar.hidden = false;
+          botonEntrar.disabled = false;
+        }
+      });
+    }
+
+    /* ==========================================================
+       EL PANEL
+       ========================================================== */
+    const formSubir = document.getElementById('form-subir');
+
+    if (formSubir) {
+      const campoArchivo = document.getElementById('archivo');
+      const nombreArchivo = document.getElementById('nombre-archivo');
+      const suelta = document.getElementById('suelta');
+      const errorSubir = document.getElementById('error-subir');
+      const okSubir = document.getElementById('ok-subir');
+      const botonSubir = document.getElementById('boton-subir');
+      const zonaProgreso = document.getElementById('zona-progreso');
+      const barra = document.getElementById('barra');
+      const relleno = document.getElementById('barra-relleno');
+      const etapa = document.getElementById('progreso-etapa');
+      const numero = document.getElementById('progreso-numero');
+      const lista = document.getElementById('lista');
+      const vacio = document.getElementById('vacio');
+      const medidor = document.getElementById('medidor-cajon');
+
+      /* ---------- Ayudas de formato ---------- */
+
+      const pesar = (bytes) => {
+        if (!bytes) return '0 MB';
+        const mb = bytes / (1024 * 1024);
+        return mb >= 1024 ? `${(mb / 1024).toFixed(2)} GB` : `${mb.toFixed(1)} MB`;
+      };
+
+      const durar = (segundos) => {
+        if (!segundos) return '';
+        const m = Math.floor(segundos / 60);
+        const s = Math.round(segundos % 60);
+        return `${m}:${String(s).padStart(2, '0')}`;
+      };
+
+      const fechar = (ms) =>
+        new Date(ms).toLocaleDateString('es-AR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+
+      /* ---------- Elegir el archivo ---------- */
+
+      const mostrarNombre = () => {
+        const archivo = campoArchivo.files?.[0];
+        nombreArchivo.textContent = archivo
+          ? `${archivo.name} (${pesar(archivo.size)})`
+          : 'Elegí un video o arrastralo hasta acá';
+      };
+
+      campoArchivo.addEventListener('change', mostrarNombre);
+
+      /* Arrastrar y soltar. El navegador por defecto ABRE el archivo cuando lo
+         soltás encima de la página, así que hay que frenarlo en los dos eventos. */
+      for (const nombre of ['dragenter', 'dragover']) {
+        suelta.addEventListener(nombre, (e) => {
+          e.preventDefault();
+          suelta.classList.add('encima');
+        });
+      }
+      for (const nombre of ['dragleave', 'drop']) {
+        suelta.addEventListener(nombre, () => suelta.classList.remove('encima'));
+      }
+      suelta.addEventListener('drop', (e) => {
+        e.preventDefault();
+        if (e.dataTransfer?.files?.length) {
+          campoArchivo.files = e.dataTransfer.files;
+          mostrarNombre();
+        }
+      });
+
+      /* ---------- Subir ---------- */
+
+      const pintar = (porcentaje, texto, convirtiendo = false) => {
+        zonaProgreso.hidden = false;
+        relleno.style.width = `${porcentaje}%`;
+        numero.textContent = `${Math.round(porcentaje)}%`;
+        etapa.textContent = texto;
+        barra.classList.toggle('convirtiendo', convirtiendo);
+      };
+
+      const postJson = async (ruta, cuerpo) => {
+        const respuesta = await fetch(ruta, {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify(cuerpo),
+        });
+        const datos = await respuesta.json().catch(() => ({}));
+        if (!respuesta.ok) throw new Error(datos.error ?? 'Algo falló en el servidor.');
+        return datos;
+      };
+
+      /* Manda UN pedazo. Se usa XMLHttpRequest en vez de fetch por una sola
+         razón: es el único que avisa cuántos bytes lleva SUBIDOS. Con fetch la
+         barra solo podría saltar de pedazo en pedazo, a los tirones. */
+      const mandarPedazo = (slug, desde, trozo, alAvanzar) =>
+        new Promise((resolver, rechazar) => {
+          const xhr = new XMLHttpRequest();
+          xhr.open('POST', `/api/subir/pedazo?slug=${encodeURIComponent(slug)}&desde=${desde}`);
+          xhr.setRequestHeader('content-type', 'application/octet-stream');
+
+          xhr.upload.addEventListener('progress', (e) => alAvanzar(e.loaded));
+
+          xhr.addEventListener('load', () => {
+            if (xhr.status >= 200 && xhr.status < 300) return resolver();
+
+            let mensaje = `El servidor rechazó el pedazo (${xhr.status}).`;
+            let esperaba;
+            try {
+              const cuerpo = JSON.parse(xhr.responseText);
+              mensaje = cuerpo.error ?? mensaje;
+              /* Cuando los pedazos se desordenan, el servidor dice por dónde iba.
+                 Ese dato es lo que permite retomar en vez de tirar todo. */
+              esperaba = cuerpo.esperaba;
+            } catch {}
+
+            const falla = new Error(mensaje);
+            if (typeof esperaba === 'number') falla.esperaba = esperaba;
+            rechazar(falla);
+          });
+
+          xhr.addEventListener('error', () => rechazar(new Error('Se cortó la conexión.')));
+          xhr.addEventListener('abort', () => rechazar(new Error('Subida cancelada.')));
+
+          xhr.send(trozo);
+        });
+
+      const esperar = (ms) => new Promise((r) => setTimeout(r, ms));
+
+      formSubir.addEventListener('submit', async (evento) => {
+        evento.preventDefault();
+        errorSubir.hidden = true;
+        okSubir.hidden = true;
+
+        const archivo = campoArchivo.files?.[0];
+        const titulo = document.getElementById('titulo').value.trim();
+
+        if (!archivo) return fallar('Elegí un archivo primero.');
+        if (!titulo) return fallar('Ponele un título.');
+        if (archivo.size > maxMB * 1024 * 1024) {
+          return fallar(`El archivo pesa ${pesar(archivo.size)} y el máximo es ${maxMB} MB.`);
+        }
+
+        botonSubir.disabled = true;
+        pintar(0, 'Preparando');
+
+        /* Se anota cuál es el video que se está subiendo ahora, para poder
+           limpiarlo del servidor si la cosa se cae en el medio. */
+        let slugEnCurso = null;
+
+        try {
+          const { slug, pedazo } = await postJson('/api/subir/iniciar', {
+            titulo,
+            bytes: archivo.size,
+          });
+          slugEnCurso = slug;
+
+          let enviado = 0;
+          let intentos = 0;
+
+          while (enviado < archivo.size) {
+            const trozo = archivo.slice(enviado, enviado + pedazo);
+            const yaEnviado = enviado;
+
+            try {
+              await mandarPedazo(slug, yaEnviado, trozo, (parcial) => {
+                pintar(((yaEnviado + parcial) / archivo.size) * 100, 'Subiendo');
+              });
+              enviado += trozo.size;
+              intentos = 0;
+              pintar((enviado / archivo.size) * 100, 'Subiendo');
+            } catch (error) {
+              /* Si el servidor dijo por dónde iba, le hacemos caso y seguimos
+                 desde ahí. Esto es lo que salva la subida cuando el pedazo
+                 llegó bien pero la respuesta se perdió en el camino: sin esto,
+                 el reintento manda el mismo pedazo, el servidor lo rechaza por
+                 desordenado, y se cae toda la subida. */
+              if (typeof error.esperaba === 'number' && error.esperaba !== enviado) {
+                enviado = error.esperaba;
+                continue;
+              }
+
+              /* Tres intentos por pedazo. Un bache momentáneo de internet no
+                 tiene por qué tirar abajo una subida entera. */
+              if (++intentos >= 3) throw error;
+              pintar((yaEnviado / archivo.size) * 100, `Reintentando (${intentos} de 3)`);
+              await esperar(1500 * intentos);
+            }
+          }
+
+          await postJson('/api/subir/terminar', { slug });
+
+          /* A partir de acá el video ya es del servidor: si algo falla más
+             abajo, no hay que borrarlo. */
+          slugEnCurso = null;
+
+          zonaProgreso.hidden = true;
+          okSubir.innerHTML =
+            'Ya subió. Ahora se está convirtiendo, y eso tarda unos minutos. '
+            + '<b>Podés cerrar esta pestaña</b>: el servidor sigue trabajando solo.';
+          okSubir.hidden = false;
+
+          formSubir.reset();
+          mostrarNombre();
+          await refrescar();
+        } catch (error) {
+          /* Si la subida se cayó a la mitad, hay que limpiar la anotación que
+             quedó del lado del servidor. Si no, esa fila fantasma se queda para
+             siempre en "Subiendo", ocupa un lugar del cajón y deja al panel
+             preguntando cada dos segundos para toda la eternidad. */
+          if (slugEnCurso) {
+            await postJson('/api/borrar', { slug: slugEnCurso }).catch(() => {});
+            await refrescar().catch(() => {});
+          }
+          fallar(error.message);
+        } finally {
+          slugEnCurso = null;
+          botonSubir.disabled = false;
+        }
+      });
+
+      function fallar(mensaje) {
+        errorSubir.textContent = mensaje;
+        errorSubir.hidden = false;
+        zonaProgreso.hidden = true;
+        botonSubir.disabled = false;
+      }
+
+      /* ---------- La lista ---------- */
+
+      const ESTADOS = {
+        subiendo: { texto: 'Subiendo', clase: '' },
+        convirtiendo: { texto: 'Convirtiendo', clase: 'chip-convirtiendo' },
+        listo: { texto: 'Listo', clase: 'chip-listo' },
+        error: { texto: 'Falló', clase: 'chip-error' },
+      };
+
+      function dibujarFila(video) {
+        const estado = ESTADOS[video.estado] ?? ESTADOS.error;
+        const li = document.createElement('li');
+        li.className = 'fila';
+
+        const izquierda = document.createElement('div');
+        const titulo = document.createElement('h3');
+        titulo.textContent = video.titulo;
+        izquierda.append(titulo);
+
+        const datos = document.createElement('div');
+        datos.className = 'datos';
+        const partes = [fechar(video.creado)];
+        if (video.estado === 'listo') {
+          if (video.segundos) partes.push(durar(video.segundos));
+          partes.push(pesar(video.bytes));
+        }
+        datos.textContent = partes.join('  ·  ');
+        izquierda.append(datos);
+
+        const chip = document.createElement('span');
+        chip.className = `chip ${estado.clase}`;
+        chip.textContent = estado.texto;
+        datos.append(document.createTextNode('  '), chip);
+
+        li.append(izquierda);
+
+        const acciones = document.createElement('div');
+        acciones.className = 'acciones';
+
+        if (video.estado === 'listo') {
+          const ver = document.createElement('a');
+          ver.className = 'btn btn-ghost btn-chico';
+          ver.href = `/v/${video.slug}`;
+          ver.target = '_blank';
+          ver.rel = 'noopener';
+          ver.textContent = 'Ver';
+
+          const copiar = document.createElement('button');
+          copiar.type = 'button';
+          copiar.className = 'btn btn-primary btn-chico';
+          copiar.textContent = 'Copiar link';
+          copiar.addEventListener('click', () => copiarLink(video.slug, copiar));
+
+          acciones.append(ver, copiar);
+        }
+
+        const borrar = document.createElement('button');
+        borrar.type = 'button';
+        borrar.className = 'btn btn-peligro btn-chico';
+        borrar.textContent = 'Borrar';
+        borrar.addEventListener('click', () => borrarVideo(video, borrar));
+        acciones.append(borrar);
+
+        li.append(acciones);
+
+        if (video.estado === 'convirtiendo') {
+          const caja = document.createElement('div');
+          caja.className = 'ancho-completo';
+          caja.innerHTML = `<div class="barra convirtiendo"><i style="width:${video.progreso ?? 0}%"></i></div>`;
+          const texto = document.createElement('div');
+          texto.className = 'progreso-texto';
+          texto.innerHTML = `<span>Convirtiendo, puede tardar unos minutos</span><span>${video.progreso ?? 0}%</span>`;
+          caja.append(texto);
+          li.append(caja);
+        }
+
+        if (video.estado === 'error' && video.detalle) {
+          const caja = document.createElement('div');
+          caja.className = 'ancho-completo aviso aviso-mal';
+          caja.style.marginBottom = '0';
+          caja.textContent = video.detalle;
+          li.append(caja);
+        }
+
+        return li;
+      }
+
+      async function copiarLink(slug, boton) {
+        const url = `${location.origin}/v/${slug}`;
+        const original = boton.textContent;
+        try {
+          await navigator.clipboard.writeText(url);
+          boton.textContent = 'Copiado';
+        } catch {
+          /* El portapapeles necesita HTTPS. Si no se puede, al menos que el
+             link quede seleccionado para copiarlo a mano. */
+          window.prompt('Copiá el link:', url);
+          return;
+        }
+        setTimeout(() => { boton.textContent = original; }, 1800);
+      }
+
+      async function borrarVideo(video, boton) {
+        if (!confirm(`¿Borrar "${video.titulo}"? El link deja de funcionar y no se puede recuperar.`)) return;
+        boton.disabled = true;
+        try {
+          await postJson('/api/borrar', { slug: video.slug });
+          await refrescar();
+        } catch (error) {
+          alert(error.message);
+          boton.disabled = false;
+        }
+      }
+
+      let reloj = null;
+
+      async function refrescar() {
+        let datos;
+        try {
+          const respuesta = await fetch('/api/videos');
+          if (respuesta.status === 401) return location.reload();
+          datos = await respuesta.json();
+          if (!Array.isArray(datos?.videos)) throw new Error('respuesta rara');
+        } catch {
+          /* Un bache de red no puede dejar la pantalla congelada y muda para
+             siempre. Se vuelve a intentar más tranquilo, cada 5 segundos. */
+          clearTimeout(reloj);
+          reloj = setTimeout(refrescar, 5000);
+          return;
+        }
+
+        lista.replaceChildren(...datos.videos.map(dibujarFila));
+        vacio.hidden = datos.videos.length > 0;
+
+        const { usados, maximo, bytes } = datos.cajon;
+        medidor.textContent = `Cajón: ${usados} de ${maximo} videos · ${pesar(bytes)} en disco`;
+
+        /* La prueba de que el volumen persistente está bien montado: esta fecha
+           tiene que seguir siendo la misma después de un redeploy. Si cambia,
+           los videos se están guardando adentro del contenedor y se van a
+           borrar solos la próxima vez que se reconstruya. */
+        const pie = document.getElementById('pie-volumen');
+        if (datos.volumen.desde) {
+          const desde = new Date(datos.volumen.desde).toLocaleString('es-AR', {
+            day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit',
+          });
+          pie.textContent = `Datos en ${datos.volumen.carpeta} · en uso desde ${desde}`;
+        } else {
+          pie.textContent = `No se pudo escribir en ${datos.volumen.carpeta}. Revisá el volumen en Dokploy.`;
+          pie.style.color = 'var(--mal)';
+        }
+
+        /* Mientras haya algo convirtiéndose, se vuelve a preguntar cada 2
+           segundos. Cuando está todo quieto, se deja de preguntar: no tiene
+           sentido molestar al servidor con pedidos que van a devolver siempre
+           lo mismo.
+
+           Solo cuenta 'convirtiendo', no 'subiendo'. Una subida la ve esta misma
+           pestaña con su propia barra; una fila en 'subiendo' que no es nuestra
+           quedó de otro lado y podría no terminar nunca, y entonces el panel
+           preguntaría cada dos segundos para siempre. */
+        const enMovimiento = datos.videos.some((v) => v.estado === 'convirtiendo');
+        clearTimeout(reloj);
+        if (enMovimiento) reloj = setTimeout(refrescar, 2000);
+      }
+
+      document.getElementById('boton-salir').addEventListener('click', async () => {
+        await fetch('/api/salir', { method: 'POST' });
+        location.reload();
+      });
+
+      refrescar();
+    }
+  </script>
+</Base>
