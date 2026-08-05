@@ -44,6 +44,27 @@ set "URL="
 set /p "URL=  > "
 if not defined URL goto sin_url
 
+rem Le metemos la cuenta adelante de la direccion, igual que la tiene la web.
+rem Hace falta porque Emiliano tiene DOS cuentas de GitHub: sin esto, git le
+rem pregunta a Windows cual usar y puede agarrar la equivocada. Y con la cuenta
+rem equivocada un repositorio privado no da "no tenes permiso", da "no existe",
+rem que es un mensaje que manda a buscar el problema donde no esta.
+set "URL=%URL:https://github.com/=https://emisalasporta@github.com/%"
+set "URL=%URL:http://github.com/=https://emisalasporta@github.com/%"
+set "URL=%URL:https://www.github.com/=https://emisalasporta@github.com/%"
+
+echo.
+echo  Voy a usar esta direccion:
+echo    %URL%
+echo.
+
+rem Antes de tocar nada, preguntamos si el repositorio existe de verdad.
+echo  Revisando que el repositorio exista...
+git ls-remote "%URL%" >nul 2>&1
+if errorlevel 1 goto no_existe
+echo  Perfecto, ahi esta.
+echo.
+
 echo.
 echo  Guardando todo...
 echo.
@@ -88,6 +109,26 @@ exit /b 0
 echo.
 echo  No pegaste ninguna direccion, asi que no subi nada.
 echo  Volve a abrir este archivo cuando la tengas.
+echo.
+pause
+exit /b 1
+
+:no_existe
+echo.
+echo  ------------------------------------------------------------
+echo    GITHUB DICE QUE ESE REPOSITORIO NO EXISTE.
+echo.
+echo    No subi nada todavia. Suele ser una de estas dos:
+echo.
+echo    1) Todavia no lo creaste. Entra a https://github.com/new
+echo       y crealo, despues volve a abrir este archivo.
+echo.
+echo    2) Lo creaste con OTRO nombre, o en TU OTRA CUENTA de
+echo       GitHub. Fijate en https://github.com/emisalasporta?tab=repositories
+echo       Si esta en la otra cuenta, avisame y lo arreglamos.
+echo.
+echo    Tu trabajo NO se perdio: sigue guardado en tu compu.
+echo  ------------------------------------------------------------
 echo.
 pause
 exit /b 1
