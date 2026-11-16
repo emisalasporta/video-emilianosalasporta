@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="Dirección Provincial de Rendimiento Deportivo · Catamarca" xmlns="http://www.topografix.com/GPX/1/1">
+  <metadata><name>Laguna Escondida</name><desc>Ida y vuelta · La Merced, Paclín. Inicio: camino junto al barrio San Nicolás. 5,1 km hasta la Laguna Escondida y vuelta, +139 m, altura máxima 1.007 m (altura corregida con el relieve del mapa). Track grabado el 1/11/2026 y limpiado de saltos de señal (sin limpiar marcaba 5,85 km). El tramo hasta el km 1,3 comparte el Circuito XCO La Merced de mountain bike. IBP a calcular. Propuesta de señales del 16/11/2026, a confirmar en la recorrida. Dirección Provincial de Rendimiento Deportivo, Catamarca. Noviembre de 2026.</desc></metadata>
+  <wpt lat="-28.163378" lon="-65.669017"><ele>885</ele><name>Inicio · camino junto al barrio San Nicolás, La Merced</name><desc>Panel con mapa, perfil, IBP y cómo resulta según la preparación, tiempo de ida y de vuelta, y teléfonos. Aviso: hasta el km 1,3 el sendero comparte el Circuito XCO La Merced de mountain bike; atención a las bicis.</desc><sym>Trailhead</sym><type>Panel de inicio</type></wpt>
+  <wpt lat="-28.163559" lon="-65.669161"><ele>884</ele><name>Salida de un lazo del circuito de bici</name><desc>Sale un sendero hacia el sur (lazo del circuito XCO). Seguir derecho hacia el oeste.</desc><sym>Flag, Blue</sym><type>Estaca de cambio de dirección</type></wpt>
+  <wpt lat="-28.164135" lon="-65.670355"><ele>883</ele><name>Cruce de senderos del circuito de bici</name><desc>Cruzan senderos hacia el norte (barrio) y hacia el sur. Seguir hacia el oeste.</desc><sym>Flag, Blue</sym><type>Estaca de cambio de dirección</type></wpt>
+  <wpt lat="-28.164097" lon="-65.671175"><ele>886</ele><name>Segundo cruce del circuito de bici</name><desc>Otro cruce con senderos al norte y al sur. Seguir hacia el oeste.</desc><sym>Flag, Blue</sym><type>Estaca de cambio de dirección</type></wpt>
+  <wpt lat="-28.164394" lon="-65.673118"><ele>899</ele><name>Desvío hacia el norte</name><desc>Sale un sendero hacia el norte. Seguir hacia el suroeste.</desc><sym>Flag, Blue</sym><type>Estaca de cambio de dirección</type></wpt>
+  <wpt lat="-28.165318" lon="-65.675749"><ele>906</ele><name>Nudo de senderos</name><desc>Llegan varios senderos desde el norte. Flechas: Laguna Escondida (hacia el sur) y La Merced (regreso).</desc><sym>Crossing</sym><type>Poste direccional</type></wpt>
+  <wpt lat="-28.165471" lon="-65.675954"><ele>908</ele><name>Confirmación después del nudo</name><desc>A menos de 25 m del poste, confirma el sendero hacia la laguna.</desc><sym>Flag, Blue</sym><type>Estaca de continuidad</type></wpt>
+  <wpt lat="-28.167864" lon="-65.677436"><ele>936</ele><name>Se separa un sendero paralelo</name><desc>Un sendero paralelo sigue hacia el sur, hacia la acequia. Seguir el principal.</desc><sym>Flag, Blue</sym><type>Estaca de cambio de dirección</type></wpt>
+  <wpt lat="-28.168667" lon="-65.678624"><ele>918</ele><name>Encuentro con el sendero de Monte Potrero</name><desc>Termina el tramo del circuito de bici. Llegan el sendero de trekking desde Monte Potrero (por la acequia) y otro sendero hacia La Merced. Flechas: Laguna Escondida, Monte Potrero y La Merced (regreso). Revisar en la recorrida el paso sobre la acequia.</desc><sym>Crossing</sym><type>Poste direccional</type></wpt>
+  <wpt lat="-28.168639" lon="-65.678929"><ele>919</ele><name>Confirmación junto a la acequia</name><desc>Confirma el sendero que sigue la acequia hacia la toma.</desc><sym>Flag, Blue</sym><type>Estaca de continuidad</type></wpt>
+  <wpt lat="-28.169123" lon="-65.680966"><ele>926</ele><name>La toma de agua y el desarenador</name><desc>Donde la acequia toma el agua del arroyo; al lado, la cascada de la toma. Contenido a definir con el municipio.</desc><sym>Information</sym><type>Cartel interpretativo</type></wpt>
+  <wpt lat="-28.169633" lon="-65.681395"><ele>935</ele><name>Cruce del arroyo</name><desc>Del otro lado del arroyo.</desc><sym>Flag, Blue</sym><type>Estaca de continuidad</type></wpt>
+  <wpt lat="-28.170161" lon="-65.681798"><ele>941</ele><name>División para los dos pozos</name><desc>Flechas: Pozo del Pájaro (unos 100 m al sur), Laguna Escondida y Pozo del Gaucho, y regreso. A 50 m hay un cartel de madera existente de inicio de cuesta (se ve en fotos de senderistas de 2025): revisar su estado y, si está bien, integrarlo.</desc><sym>Crossing</sym><type>Poste direccional</type></wpt>
+  <wpt lat="-28.171036" lon="-65.683233"><ele>984</ele><name>Cruce junto a las tres cascadas</name><desc>Se cruzan senderos hacia las cascadas. Hay señalización existente junto a un palo borracho (se ve en fotos de senderistas de 2025): revisar.</desc><sym>Flag, Blue</sym><type>Estaca de cambio de dirección</type></wpt>
+  <wpt lat="-28.171252" lon="-65.683980"><ele>980</ele><name>Bifurcación: Laguna Escondida o Pozo Los Tres</name><desc>La laguna sale a la izquierda y sube hacia el sur; Pozo Los Tres sigue derecho. Flechas: Laguna Escondida, Pozo Los Tres y regreso.</desc><sym>Crossing</sym><type>Poste direccional</type></wpt>
+  <wpt lat="-28.171324" lon="-65.684262"><ele>982</ele><name>Confirmación hacia la laguna</name><desc>A menos de 25 m del poste, confirma el desvío a la laguna.</desc><sym>Flag, Blue</sym><type>Estaca de continuidad</type></wpt>
+  <wpt lat="-28.172254" lon="-65.684592"><ele>980</ele><name>Subida a la laguna</name><desc>Tramo de cuesta en el monte.</desc><sym>Flag, Blue</sym><type>Estaca de continuidad</type></wpt>
+  <wpt lat="-28.173435" lon="-65.685407"><ele>984</ele><name>Cruce del arroyo</name><desc>Del otro lado del arroyo.</desc><sym>Flag, Blue</sym><type>Estaca de continuidad</type></wpt>
+  <wpt lat="-28.173627" lon="-65.685529"><ele>987</ele><name>Último cruce de senderos</name><desc>Cruce cerca de la laguna. Seguir hacia el oeste.</desc><sym>Flag, Blue</sym><type>Estaca de cambio de dirección</type></wpt>
+  <wpt lat="-28.173443" lon="-65.686036"><ele>994</ele><name>Entrada al cauce de piedras</name><desc>El tramo final sube por las rocas del cauce. Si no se puede clavar la estaca, marca pintada en la roca con los mismos colores.</desc><sym>Flag, Blue</sym><type>Estaca de continuidad</type></wpt>
+  <wpt lat="-28.173042" lon="-65.686392"><ele>1013</ele><name>Laguna Escondida</name><desc>Laguna Escondida: nombre, altura y km recorridos.</desc><sym>Summit</sym><type>Cartel de destino</type></wpt>
+  <trk><name>Laguna Escondida</name><trkseg>
+      <trkpt lat="-28.163378" lon="-65.669017"><ele>885</ele></trkpt>
+      <trkpt lat="-28.163522" lon="-65.669060"><ele>883</ele></trkpt>
+      <trkpt lat="-28.163670" lon="-65.669462"><ele>886</ele></trkpt>
+      <trkpt lat="-28.163732" lon="-65.669537"><ele>886</ele></trkpt>
+      <trkpt lat="-28.163811" lon="-65.670048"><ele>884</ele></trkpt>
+      <trkpt lat="-28.164173" lon="-65.670391"><ele>883</ele></trkpt>
+      <trkpt lat="-28.164266" lon="-65.670611"><ele>885</ele></trkpt>
+      <trkpt lat="-28.164274" lon="-65.670823"><ele>884</ele></trkpt>
+      <trkpt lat="-28.164052" lon="-65.671265"><ele>886</ele></trkpt>
+      <trkpt lat="-28.164039" lon="-65.671373"><ele>887</ele></trkpt>
+      <trkpt lat="-28.164083" lon="-65.671690"><ele>888</ele></trkpt>
+      <trkpt lat="-28.164174" lon="-65.671908"><ele>888</ele></trkpt>
+      <trkpt lat="-28.164175" lon="-65.672126"><ele>889</ele></trkpt>
+      <trkpt lat="-28.164240" lon="-65.672351"><ele>890</ele></trkpt>
+      <trkpt lat="-28.164230" lon="-65.672711"><ele>893</ele></trkpt>
+      <trkpt lat="-28.164324" lon="-65.672879"><ele>897</ele></trkpt>
+      <trkpt lat="-28.164403" lon="-65.673149"><ele>899</ele></trkpt>
+      <trkpt lat="-28.164653" lon="-65.673360"><ele>897</ele></trkpt>
+      <trkpt lat="-28.164719" lon="-65.673506"><ele>896</ele></trkpt>
+      <trkpt lat="-28.164736" lon="-65.673600"><ele>896</ele></trkpt>
+      <trkpt lat="-28.164674" lon="-65.673830"><ele>897</ele></trkpt>
+      <trkpt lat="-28.164796" lon="-65.674169"><ele>898</ele></trkpt>
+      <trkpt lat="-28.165063" lon="-65.674443"><ele>900</ele></trkpt>
+      <trkpt lat="-28.165287" lon="-65.674814"><ele>903</ele></trkpt>
+      <trkpt lat="-28.165309" lon="-65.675071"><ele>903</ele></trkpt>
+      <trkpt lat="-28.165260" lon="-65.675249"><ele>904</ele></trkpt>
+      <trkpt lat="-28.165333" lon="-65.675882"><ele>907</ele></trkpt>
+      <trkpt lat="-28.165568" lon="-65.676005"><ele>909</ele></trkpt>
+      <trkpt lat="-28.165784" lon="-65.676058"><ele>914</ele></trkpt>
+      <trkpt lat="-28.166255" lon="-65.676717"><ele>916</ele></trkpt>
+      <trkpt lat="-28.166700" lon="-65.677111"><ele>926</ele></trkpt>
+      <trkpt lat="-28.167186" lon="-65.677112"><ele>930</ele></trkpt>
+      <trkpt lat="-28.167467" lon="-65.677161"><ele>935</ele></trkpt>
+      <trkpt lat="-28.168161" lon="-65.677643"><ele>936</ele></trkpt>
+      <trkpt lat="-28.168474" lon="-65.678253"><ele>925</ele></trkpt>
+      <trkpt lat="-28.168485" lon="-65.678489"><ele>921</ele></trkpt>
+      <trkpt lat="-28.168598" lon="-65.678490"><ele>917</ele></trkpt>
+      <trkpt lat="-28.168671" lon="-65.678582"><ele>918</ele></trkpt>
+      <trkpt lat="-28.168564" lon="-65.679753"><ele>922</ele></trkpt>
+      <trkpt lat="-28.168600" lon="-65.679897"><ele>922</ele></trkpt>
+      <trkpt lat="-28.168548" lon="-65.679977"><ele>923</ele></trkpt>
+      <trkpt lat="-28.168587" lon="-65.680094"><ele>923</ele></trkpt>
+      <trkpt lat="-28.168671" lon="-65.680075"><ele>920</ele></trkpt>
+      <trkpt lat="-28.168589" lon="-65.680222"><ele>924</ele></trkpt>
+      <trkpt lat="-28.168628" lon="-65.680311"><ele>924</ele></trkpt>
+      <trkpt lat="-28.168874" lon="-65.680723"><ele>925</ele></trkpt>
+      <trkpt lat="-28.169066" lon="-65.680874"><ele>926</ele></trkpt>
+      <trkpt lat="-28.169142" lon="-65.680997"><ele>926</ele></trkpt>
+      <trkpt lat="-28.169373" lon="-65.681154"><ele>927</ele></trkpt>
+      <trkpt lat="-28.169533" lon="-65.681358"><ele>935</ele></trkpt>
+      <trkpt lat="-28.169742" lon="-65.681435"><ele>934</ele></trkpt>
+      <trkpt lat="-28.170001" lon="-65.681585"><ele>935</ele></trkpt>
+      <trkpt lat="-28.170012" lon="-65.681648"><ele>941</ele></trkpt>
+      <trkpt lat="-28.170165" lon="-65.681802"><ele>941</ele></trkpt>
+      <trkpt lat="-28.170260" lon="-65.682001"><ele>945</ele></trkpt>
+      <trkpt lat="-28.170318" lon="-65.682286"><ele>947</ele></trkpt>
+      <trkpt lat="-28.170258" lon="-65.682493"><ele>947</ele></trkpt>
+      <trkpt lat="-28.170264" lon="-65.682605"><ele>947</ele></trkpt>
+      <trkpt lat="-28.170205" lon="-65.682660"><ele>947</ele></trkpt>
+      <trkpt lat="-28.170204" lon="-65.682552"><ele>946</ele></trkpt>
+      <trkpt lat="-28.170262" lon="-65.682321"><ele>946</ele></trkpt>
+      <trkpt lat="-28.170381" lon="-65.682264"><ele>950</ele></trkpt>
+      <trkpt lat="-28.170509" lon="-65.682480"><ele>962</ele></trkpt>
+      <trkpt lat="-28.170523" lon="-65.682753"><ele>968</ele></trkpt>
+      <trkpt lat="-28.170663" lon="-65.682844"><ele>969</ele></trkpt>
+      <trkpt lat="-28.170728" lon="-65.683040"><ele>978</ele></trkpt>
+      <trkpt lat="-28.170841" lon="-65.683162"><ele>981</ele></trkpt>
+      <trkpt lat="-28.170988" lon="-65.683197"><ele>983</ele></trkpt>
+      <trkpt lat="-28.171076" lon="-65.683264"><ele>984</ele></trkpt>
+      <trkpt lat="-28.171167" lon="-65.683422"><ele>984</ele></trkpt>
+      <trkpt lat="-28.171236" lon="-65.683741"><ele>982</ele></trkpt>
+      <trkpt lat="-28.171229" lon="-65.683918"><ele>980</ele></trkpt>
+      <trkpt lat="-28.171340" lon="-65.684218"><ele>982</ele></trkpt>
+      <trkpt lat="-28.171311" lon="-65.684299"><ele>982</ele></trkpt>
+      <trkpt lat="-28.171335" lon="-65.684450"><ele>980</ele></trkpt>
+      <trkpt lat="-28.171768" lon="-65.684666"><ele>978</ele></trkpt>
+      <trkpt lat="-28.171872" lon="-65.684578"><ele>979</ele></trkpt>
+      <trkpt lat="-28.171956" lon="-65.684597"><ele>981</ele></trkpt>
+      <trkpt lat="-28.172170" lon="-65.684550"><ele>980</ele></trkpt>
+      <trkpt lat="-28.172263" lon="-65.684596"><ele>980</ele></trkpt>
+      <trkpt lat="-28.172368" lon="-65.684545"><ele>980</ele></trkpt>
+      <trkpt lat="-28.172542" lon="-65.684631"><ele>983</ele></trkpt>
+      <trkpt lat="-28.172706" lon="-65.684779"><ele>984</ele></trkpt>
+      <trkpt lat="-28.172878" lon="-65.684816"><ele>983</ele></trkpt>
+      <trkpt lat="-28.173045" lon="-65.685006"><ele>982</ele></trkpt>
+      <trkpt lat="-28.173316" lon="-65.685205"><ele>980</ele></trkpt>
+      <trkpt lat="-28.173361" lon="-65.685286"><ele>981</ele></trkpt>
+      <trkpt lat="-28.173272" lon="-65.685324"><ele>983</ele></trkpt>
+      <trkpt lat="-28.173413" lon="-65.685409"><ele>984</ele></trkpt>
+      <trkpt lat="-28.173567" lon="-65.685396"><ele>984</ele></trkpt>
+      <trkpt lat="-28.173603" lon="-65.685515"><ele>986</ele></trkpt>
+      <trkpt lat="-28.173740" lon="-65.685594"><ele>990</ele></trkpt>
+      <trkpt lat="-28.173742" lon="-65.685773"><ele>990</ele></trkpt>
+      <trkpt lat="-28.173673" lon="-65.685946"><ele>990</ele></trkpt>
+      <trkpt lat="-28.173555" lon="-65.685946"><ele>992</ele></trkpt>
+      <trkpt lat="-28.173510" lon="-65.686022"><ele>994</ele></trkpt>
+      <trkpt lat="-28.173386" lon="-65.686047"><ele>994</ele></trkpt>
+      <trkpt lat="-28.173216" lon="-65.686327"><ele>1002</ele></trkpt>
+      <trkpt lat="-28.173057" lon="-65.686266"><ele>1002</ele></trkpt>
+      <trkpt lat="-28.173062" lon="-65.686386"><ele>1008</ele></trkpt>
+      <trkpt lat="-28.173041" lon="-65.686355"><ele>1009</ele></trkpt>
+      <trkpt lat="-28.173042" lon="-65.686392"><ele>1013</ele></trkpt>
+      <trkpt lat="-28.173041" lon="-65.686355"><ele>1009</ele></trkpt>
+      <trkpt lat="-28.173062" lon="-65.686386"><ele>1008</ele></trkpt>
+      <trkpt lat="-28.173057" lon="-65.686266"><ele>1002</ele></trkpt>
+      <trkpt lat="-28.173216" lon="-65.686327"><ele>1002</ele></trkpt>
+      <trkpt lat="-28.173386" lon="-65.686047"><ele>994</ele></trkpt>
+      <trkpt lat="-28.173510" lon="-65.686022"><ele>994</ele></trkpt>
+      <trkpt lat="-28.173555" lon="-65.685946"><ele>992</ele></trkpt>
+      <trkpt lat="-28.173673" lon="-65.685946"><ele>990</ele></trkpt>
+      <trkpt lat="-28.173742" lon="-65.685773"><ele>990</ele></trkpt>
+      <trkpt lat="-28.173740" lon="-65.685594"><ele>990</ele></trkpt>
+      <trkpt lat="-28.173603" lon="-65.685515"><ele>986</ele></trkpt>
+      <trkpt lat="-28.173567" lon="-65.685396"><ele>984</ele></trkpt>
+      <trkpt lat="-28.173413" lon="-65.685409"><ele>984</ele></trkpt>
+      <trkpt lat="-28.173272" lon="-65.685324"><ele>983</ele></trkpt>
+      <trkpt lat="-28.173361" lon="-65.685286"><ele>981</ele></trkpt>
+      <trkpt lat="-28.173316" lon="-65.685205"><ele>980</ele></trkpt>
+      <trkpt lat="-28.173045" lon="-65.685006"><ele>982</ele></trkpt>
+      <trkpt lat="-28.172878" lon="-65.684816"><ele>983</ele></trkpt>
+      <trkpt lat="-28.172706" lon="-65.684779"><ele>984</ele></trkpt>
+      <trkpt lat="-28.172542" lon="-65.684631"><ele>983</ele></trkpt>
+      <trkpt lat="-28.172368" lon="-65.684545"><ele>980</ele></trkpt>
+      <trkpt lat="-28.172263" lon="-65.684596"><ele>980</ele></trkpt>
+      <trkpt lat="-28.172170" lon="-65.684550"><ele>980</ele></trkpt>
+      <trkpt lat="-28.171956" lon="-65.684597"><ele>981</ele></trkpt>
+      <trkpt lat="-28.171872" lon="-65.684578"><ele>979</ele></trkpt>
+      <trkpt lat="-28.171768" lon="-65.684666"><ele>978</ele></trkpt>
+      <trkpt lat="-28.171335" lon="-65.684450"><ele>980</ele></trkpt>
+      <trkpt lat="-28.171311" lon="-65.684299"><ele>982</ele></trkpt>
+      <trkpt lat="-28.171340" lon="-65.684218"><ele>982</ele></trkpt>
+      <trkpt lat="-28.171229" lon="-65.683918"><ele>980</ele></trkpt>
+      <trkpt lat="-28.171236" lon="-65.683741"><ele>982</ele></trkpt>
+      <trkpt lat="-28.171167" lon="-65.683422"><ele>984</ele></trkpt>
+      <trkpt lat="-28.171076" lon="-65.683264"><ele>984</ele></trkpt>
+      <trkpt lat="-28.170988" lon="-65.683197"><ele>983</ele></trkpt>
+      <trkpt lat="-28.170841" lon="-65.683162"><ele>981</ele></trkpt>
+      <trkpt lat="-28.170728" lon="-65.683040"><ele>978</ele></trkpt>
+      <trkpt lat="-28.170663" lon="-65.682844"><ele>969</ele></trkpt>
+      <trkpt lat="-28.170523" lon="-65.682753"><ele>968</ele></trkpt>
+      <trkpt lat="-28.170509" lon="-65.682480"><ele>962</ele></trkpt>
+      <trkpt lat="-28.170381" lon="-65.682264"><ele>950</ele></trkpt>
+      <trkpt lat="-28.170262" lon="-65.682321"><ele>946</ele></trkpt>
+      <trkpt lat="-28.170204" lon="-65.682552"><ele>946</ele></trkpt>
+      <trkpt lat="-28.170205" lon="-65.682660"><ele>947</ele></trkpt>
+      <trkpt lat="-28.170264" lon="-65.682605"><ele>947</ele></trkpt>
+      <trkpt lat="-28.170258" lon="-65.682493"><ele>947</ele></trkpt>
+      <trkpt lat="-28.170318" lon="-65.682286"><ele>947</ele></trkpt>
+      <trkpt lat="-28.170260" lon="-65.682001"><ele>945</ele></trkpt>
+      <trkpt lat="-28.170165" lon="-65.681802"><ele>941</ele></trkpt>
+      <trkpt lat="-28.170012" lon="-65.681648"><ele>941</ele></trkpt>
+      <trkpt lat="-28.170001" lon="-65.681585"><ele>935</ele></trkpt>
+      <trkpt lat="-28.169742" lon="-65.681435"><ele>934</ele></trkpt>
+      <trkpt lat="-28.169533" lon="-65.681358"><ele>935</ele></trkpt>
+      <trkpt lat="-28.169373" lon="-65.681154"><ele>927</ele></trkpt>
+      <trkpt lat="-28.169142" lon="-65.680997"><ele>926</ele></trkpt>
+      <trkpt lat="-28.169066" lon="-65.680874"><ele>926</ele></trkpt>
+      <trkpt lat="-28.168874" lon="-65.680723"><ele>925</ele></trkpt>
+      <trkpt lat="-28.168628" lon="-65.680311"><ele>924</ele></trkpt>
+      <trkpt lat="-28.168589" lon="-65.680222"><ele>924</ele></trkpt>
+      <trkpt lat="-28.168671" lon="-65.680075"><ele>920</ele></trkpt>
+      <trkpt lat="-28.168587" lon="-65.680094"><ele>923</ele></trkpt>
+      <trkpt lat="-28.168548" lon="-65.679977"><ele>923</ele></trkpt>
+      <trkpt lat="-28.168600" lon="-65.679897"><ele>922</ele></trkpt>
+      <trkpt lat="-28.168564" lon="-65.679753"><ele>922</ele></trkpt>
+      <trkpt lat="-28.168671" lon="-65.678582"><ele>918</ele></trkpt>
+      <trkpt lat="-28.168598" lon="-65.678490"><ele>917</ele></trkpt>
+      <trkpt lat="-28.168485" lon="-65.678489"><ele>921</ele></trkpt>
+      <trkpt lat="-28.168474" lon="-65.678253"><ele>925</ele></trkpt>
+      <trkpt lat="-28.168161" lon="-65.677643"><ele>936</ele></trkpt>
+      <trkpt lat="-28.167467" lon="-65.677161"><ele>935</ele></trkpt>
+      <trkpt lat="-28.167186" lon="-65.677112"><ele>930</ele></trkpt>
+      <trkpt lat="-28.166700" lon="-65.677111"><ele>926</ele></trkpt>
+      <trkpt lat="-28.166255" lon="-65.676717"><ele>916</ele></trkpt>
+      <trkpt lat="-28.165784" lon="-65.676058"><ele>914</ele></trkpt>
+      <trkpt lat="-28.165568" lon="-65.676005"><ele>909</ele></trkpt>
+      <trkpt lat="-28.165333" lon="-65.675882"><ele>907</ele></trkpt>
+      <trkpt lat="-28.165260" lon="-65.675249"><ele>904</ele></trkpt>
+      <trkpt lat="-28.165309" lon="-65.675071"><ele>903</ele></trkpt>
+      <trkpt lat="-28.165287" lon="-65.674814"><ele>903</ele></trkpt>
+      <trkpt lat="-28.165063" lon="-65.674443"><ele>900</ele></trkpt>
+      <trkpt lat="-28.164796" lon="-65.674169"><ele>898</ele></trkpt>
+      <trkpt lat="-28.164674" lon="-65.673830"><ele>897</ele></trkpt>
+      <trkpt lat="-28.164736" lon="-65.673600"><ele>896</ele></trkpt>
+      <trkpt lat="-28.164719" lon="-65.673506"><ele>896</ele></trkpt>
+      <trkpt lat="-28.164653" lon="-65.673360"><ele>897</ele></trkpt>
+      <trkpt lat="-28.164403" lon="-65.673149"><ele>899</ele></trkpt>
+      <trkpt lat="-28.164324" lon="-65.672879"><ele>897</ele></trkpt>
+      <trkpt lat="-28.164230" lon="-65.672711"><ele>893</ele></trkpt>
+      <trkpt lat="-28.164240" lon="-65.672351"><ele>890</ele></trkpt>
+      <trkpt lat="-28.164175" lon="-65.672126"><ele>889</ele></trkpt>
+      <trkpt lat="-28.164174" lon="-65.671908"><ele>888</ele></trkpt>
+      <trkpt lat="-28.164083" lon="-65.671690"><ele>888</ele></trkpt>
+      <trkpt lat="-28.164039" lon="-65.671373"><ele>887</ele></trkpt>
+      <trkpt lat="-28.164052" lon="-65.671265"><ele>886</ele></trkpt>
+      <trkpt lat="-28.164274" lon="-65.670823"><ele>884</ele></trkpt>
+      <trkpt lat="-28.164266" lon="-65.670611"><ele>885</ele></trkpt>
+      <trkpt lat="-28.164173" lon="-65.670391"><ele>883</ele></trkpt>
+      <trkpt lat="-28.163811" lon="-65.670048"><ele>884</ele></trkpt>
+      <trkpt lat="-28.163732" lon="-65.669537"><ele>886</ele></trkpt>
+      <trkpt lat="-28.163670" lon="-65.669462"><ele>886</ele></trkpt>
+      <trkpt lat="-28.163522" lon="-65.669060"><ele>883</ele></trkpt>
+      <trkpt lat="-28.163378" lon="-65.669017"><ele>885</ele></trkpt>
+  </trkseg></trk>
+</gpx>
